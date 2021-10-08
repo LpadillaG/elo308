@@ -124,6 +124,59 @@ epochs3 = mne.Epochs(raw=eeg3_Fpz, events=events3,
 
 print(epochs1)
 
+##################
+#Plot some epochs
+epochs1_data=epochs1.get_data()#darray of shape (929,1,3000)
+epochs2_data=epochs2.get_data()
+epochs3_data=epochs3.get_data()
+L=np.arange(3000) #samples per epoch
+#print(len(epochs1_data[0,0,:]))
+
+fig1, axs1 = plt.subplots(nrows=3,ncols=2)
+axs1[0,0].plot(L/sf_1, epochs1_data[0,0,:])  #why 0.0001
+axs1[0,0].set_xlim((0,30)) #epoch 0 
+#axs1[0,0].set_ylim((-100*10**-7,100*10**-7))
+axs1[0,0].set_title('época 1, Persona 2 (Fpz_Cz)') #No superponer titulos de estos dos plots
+axs1[0,0].set_xlabel('tiempo [s]')
+axs1[0,0].set_ylabel('voltaje [uV]')
+
+axs1[1,0].plot(L/sf_2, epochs2_data[0,0,:])
+axs1[1,0].set_xlim((0,30))
+axs1[1,0].set_title('época 1, Persona 6')
+axs1[1,0].set_xlabel('tiempo [s]')
+axs1[1,0].set_ylabel('voltaje [uV]')
+
+axs1[0,1].plot(L/sf_1,epochs1_data[1,0,:])
+axs1[0,1].set_xlim((0,30)) #epoch 2 
+axs1[0,1].set_title('época 2, Persona 2')
+axs1[0,1].set_xlabel('tiempo [s]')
+axs1[0,1].set_ylabel('voltaje [uV]')
+
+axs1[1,1].plot(L/sf_2, epochs2_data[1,0,:])
+axs1[1,1].set_xlim((0,30)) #epoch 2 
+axs1[1,1].set_title('época 2, Persona 6')
+axs1[1,1].set_xlabel('tiempo [s]')
+axs1[1,1].set_ylabel('voltaje [uV]')
+
+axs1[2,0].plot(L/sf_3,epochs3_data[0,0,:])
+axs1[2,0].set_xlim((0,30)) #epoch 2 
+axs1[2,0].set_title('época 1, Persona 9')
+axs1[2,0].set_xlabel('tiempo [s]')
+axs1[2,0].set_ylabel('voltaje [uV]')
+
+axs1[2,1].plot(L/sf_3, epochs3_data[1,0,:])
+axs1[2,1].set_xlim((0,30)) #epoch 2 
+axs1[2,1].set_title('época 2, Persona 9')
+axs1[2,1].set_xlabel('tiempo [s]')
+axs1[2,1].set_ylabel('voltaje [uV]')
+
+
+fig1.tight_layout()
+
+plt.show()
+
+
+
 #Visualizar densidad de potencia espectral (PSD) de las tres personas
 fig, (ax1, ax2, ax3) = plt.subplots(ncols=3)
 
